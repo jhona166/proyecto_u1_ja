@@ -8,23 +8,56 @@ public class CitaMedica {
 	private LocalDateTime fechaCita;
 	private LocalDateTime fechaAgenda;
 	private Medico medico;
-	private Paciente paceinte;
+	private Paciente paciente;
 	
-	private void agendar(String numer, LocalDateTime fechaCita, String nombreMedico, String cedulaMedico,
-			String nombrePaciente, String cedulaPaciente) {
+	public void agendar(String numero, LocalDateTime fechaCita, String nombreMedico, String cedulaMedico,
+			String nombrePaciente, String cedulaPaciente,String tipo) {
 		this.numero= numero;
 		this.fechaCita= fechaCita;
+		this.fechaAgenda= LocalDateTime.now();
+
 		
-		Medico medico= new Medico();
-		medico.setCedula(cedulaMedico);
-		medico.setNombre(nombreMedico);
+		Medico medicoObjeto= new Medico();
+		medicoObjeto.setCedula(cedulaMedico);
+		medicoObjeto.setNombre(nombreMedico);
 		
-		this.medico=medico;
+		this.medico=medicoObjeto;
 		
-		Paciente pacienteObjeto= new Paciente();
-		pacienteObjeto.setCedula(cedulaPaciente);
-		pacienteObjeto.setNombre(nombrePaciente);
-		this.paceinte = pacienteObjeto;
+		//Tercera edad(TE), Ninio(N)
+		if(tipo.equals("TE")) {
+		   PacienteTerceraEdad pacienteTE = new PacienteTerceraEdad();
+		   pacienteTE.setCodIess("12313245");
+		   pacienteTE.setTipo("TE");
+		    
+		   this.paciente =pacienteTE;
+		   System.out.println("paciente con descuento");
+		}else {
+			PacienteNinio pacienteNinio = new PacienteNinio(); 
+			pacienteNinio.setPesoNacimiento(5);	
+			pacienteNinio.setTipo("TE");	
+			   
+			this.paciente =pacienteNinio;
+			System.out.println("Paciente ninio sin descuento");
+		}
+		this.paciente.setNombre(nombrePaciente);
+		this.paciente.setCedula(cedulaPaciente);
+		   
+		this.guardarCita(this);
+		
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "CitaMedica [numero=" + numero + ", fechaCita=" + fechaCita + ", fechaAgenda=" + fechaAgenda
+				+ ", medico=" + medico + ", paceinte=" + paciente + "]";
+	}
+	
+	
+	private void guardarCita(CitaMedica cita) {
+		//Insert en la base de datos, guardar la cita
+		System.out.println(cita);
+		
 		
 	}
 	//SET Y GET
@@ -53,10 +86,10 @@ public class CitaMedica {
 		this.medico = medico;
 	}
 	public Paciente getPaceinte() {
-		return paceinte;
+		return paciente;
 	}
 	public void setPaceinte(Paciente paceinte) {
-		this.paceinte = paceinte;
+		this.paciente = paceinte;
 	}
 	
 	
