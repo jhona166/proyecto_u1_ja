@@ -5,4 +5,5 @@ public class PacienteCancerH {
 		System.out.println("Paciente con Cancer con el 30% de descuento");
 		return 30; 
 	}
+	//Clase nueva
 }
