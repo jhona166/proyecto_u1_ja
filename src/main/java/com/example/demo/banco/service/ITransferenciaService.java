@@ -1,5 +1,5 @@
 package com.example.demo.banco.service;
 
-public class ITransferenciaService {
+public interface ITransferenciaService {
 
 }
