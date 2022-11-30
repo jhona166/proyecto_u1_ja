@@ -8,6 +8,11 @@ public class CuentaBancaria {
 	private BigDecimal saldo; 
 	private String titular;
 	
+	@Override
+	public String toString() {
+		return "CuentaBancaria [numero=" + numero + ", tipo=" + tipo + ", saldo=" + saldo + ", titular=" + titular
+				+ "]";
+	}
 	//Set and Get
 	public String getNumero() {
 		return numero;
