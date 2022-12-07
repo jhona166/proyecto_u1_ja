@@ -9,7 +9,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.demo.banco.modelo.CuentaBancaria;
+import com.example.demo.banco.modelo.Transferencia;
+import com.example.demo.banco.repository.ICuentaBancariaRepository;
 import com.example.demo.banco.service.ICuentaBancariaService;
+import com.example.demo.banco.service.ITransferenciaService;
 import com.example.demo.herencia.CitaMedicaH;
 import com.example.demo.spring.boot.CitaMedicaSB;
 import com.example.demo.spring.boot.MedicoSB;
@@ -20,6 +23,8 @@ import com.example.demo.spring.boot.PacienteTerceraEdadSB;
 public class ProyectoU1JaApplication implements CommandLineRunner {
 	@Autowired
 	private ICuentaBancariaService bancariaService;
+	@Autowired
+	private ITransferenciaService iTransferenciaService;
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU1JaApplication.class, args);
 	}
@@ -32,6 +37,7 @@ public class ProyectoU1JaApplication implements CommandLineRunner {
 		cuenta1.setTipo("A");
 		cuenta1.setTitular("Juan Aria");
 		cuenta1.setSaldo(new BigDecimal(100));	
+		
 		this.bancariaService.insertar(cuenta1);
 	
 		
@@ -39,8 +45,20 @@ public class ProyectoU1JaApplication implements CommandLineRunner {
 		cuenta2.setNumero("002");
 		cuenta2.setTipo("A");
 		cuenta2.setTitular("Diana Farias");
-		cuenta2.setSaldo(new BigDecimal(500));	
+		cuenta2.setSaldo(new BigDecimal(200));	
+		
 		this.bancariaService.insertar(cuenta2);
+		System.out.println("Reporte 1");
+		for(Transferencia t : this.iTransferenciaService.buscarReporte()) {
+			System.out.println(t);
+		}
+		this.iTransferenciaService.realizar("001","002",new BigDecimal(100));
+		System.out.println("Reporte 2");
+	//	System.out.println(this.iTransferenciaService.bus);
+		for(Transferencia t:this.iTransferenciaService.buscarReporte()) {
+			System.out.println(t);
+		}
+	
 	}
 
 }

@@ -10,4 +10,5 @@ public interface ICuentaBancariaService {
 	public void actualizar(CuentaBancaria cuentaBancaria);
 	public void insertar(CuentaBancaria cuentaBancaria);
 	public void borrar(Integer id);
+
 }

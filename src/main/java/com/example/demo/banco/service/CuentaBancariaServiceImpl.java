@@ -27,6 +27,7 @@ public class CuentaBancariaServiceImpl implements ICuentaBancariaService {
 	public void actualizar(CuentaBancaria cuentaBancaria) {
 		// TODO Auto-generated method stub
 		
+		
 	}
 
 	@Override
