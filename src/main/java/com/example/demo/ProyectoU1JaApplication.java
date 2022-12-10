@@ -48,6 +48,14 @@ public class ProyectoU1JaApplication implements CommandLineRunner {
 		cuenta2.setSaldo(new BigDecimal(200));	
 		
 		this.bancariaService.insertar(cuenta2);
+		
+		System.out.println("Saldos acuales");
+		CuentaBancaria cuentaActual1 = this.bancariaService.buscarPorNumero("001");
+		CuentaBancaria cuentaActual2= this.bancariaService.buscarPorNumero("002");
+		
+		System.out.println("Saldo actual: "+cuentaActual1.getSaldo());
+		System.out.println("Saldo actual: "+cuentaActual2.getSaldo());
+		
 		System.out.println("Reporte 1");
 		for(Transferencia t : this.iTransferenciaService.buscarReporte()) {
 			System.out.println(t);
@@ -58,7 +66,12 @@ public class ProyectoU1JaApplication implements CommandLineRunner {
 		for(Transferencia t:this.iTransferenciaService.buscarReporte()) {
 			System.out.println(t);
 		}
-	
+		System.out.println("Saldos nuevos");
+		CuentaBancaria cuentaConsultar1 = this.bancariaService.buscarPorNumero("001");
+		CuentaBancaria cuentaConsultar2 = this.bancariaService.buscarPorNumero("002");
+		
+		System.out.println("Nuevo saldo: "+cuentaConsultar1.getSaldo());
+		System.out.println("Nuevo saldo: "+cuentaConsultar2.getSaldo());
 	}
 
 }
