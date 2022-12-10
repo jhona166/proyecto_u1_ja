@@ -27,8 +27,9 @@ public class CuentaBancariaRepositoryImpl implements ICuentaBancariaRepository {
 		for(CuentaBancaria cb: baseCuentas) {
 			if(cb.getNumero().equals(numeroCuenta)) {
 				cuenta = cb;
+				System.out.println("Se busca la cuenta bancaria: "+numeroCuenta);
 			}
-			System.out.println("Se busca la cuenta bancaria: "+numeroCuenta);
+			
 		}
 		return cuenta;
 	}
