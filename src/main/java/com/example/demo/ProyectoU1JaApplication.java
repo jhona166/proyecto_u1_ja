@@ -8,23 +8,24 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.demo.banco.modelo.CuentaBancaria;
-import com.example.demo.banco.modelo.Transferencia;
-import com.example.demo.banco.repository.ICuentaBancariaRepository;
-import com.example.demo.banco.service.ICuentaBancariaService;
-import com.example.demo.banco.service.ITransferenciaService;
-import com.example.demo.herencia.CitaMedicaH;
-import com.example.demo.spring.boot.CitaMedicaSB;
-import com.example.demo.spring.boot.MedicoSB;
-import com.example.demo.spring.boot.PacienteCancerSB;
-import com.example.demo.spring.boot.PacienteTerceraEdadSB;
+import com.example.demo.ejercicio1.modelo.Propietario;
+import com.example.demo.ejercicio1.modelo.Vehiculo;
+import com.example.demo.ejercicio1.service.IMatriculaRepository;
+import com.example.demo.ejercicio1.service.IMatriculaService;
+import com.example.demo.ejercicio1.service.IPropietarioService;
+import com.example.demo.ejercicio1.service.IVehiculoService;
 
 @SpringBootApplication
 public class ProyectoU1JaApplication implements CommandLineRunner {
+	
+	
 	@Autowired
-	private ICuentaBancariaService bancariaService;
+	private IVehiculoService iVehiculoService;
 	@Autowired
-	private ITransferenciaService iTransferenciaService;
+	private IPropietarioService iPropietarioService;
+	@Autowired
+	private IMatriculaService iMatriculaService;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU1JaApplication.class, args);
 	}
@@ -32,46 +33,31 @@ public class ProyectoU1JaApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		CuentaBancaria cuenta1 = new CuentaBancaria();
-		cuenta1.setNumero("001");
-		cuenta1.setTipo("A");
-		cuenta1.setTitular("Juan Aria");
-		cuenta1.setSaldo(new BigDecimal(100));	
+		//Opcion1
+		Vehiculo vehi = new Vehiculo();
+		vehi.setMarca("Toyota");
+		vehi.setPlaca("PDGD5667");
+		vehi.setPrecio(new BigDecimal(20000));
+		vehi.setTipo("P");
 		
-		this.bancariaService.insertar(cuenta1);
-	
+		this.iVehiculoService.crear(vehi);
 		
-		CuentaBancaria cuenta2 = new CuentaBancaria();
-		cuenta2.setNumero("002");
-		cuenta2.setTipo("A");
-		cuenta2.setTitular("Diana Farias");
-		cuenta2.setSaldo(new BigDecimal(200));	
+		vehi.setPrecio(new BigDecimal(10000));
+		vehi.setMarca("Toyota");
 		
-		this.bancariaService.insertar(cuenta2);
+		this.iVehiculoService.modificar(vehi);
 		
-		System.out.println("Saldos acuales");
-		CuentaBancaria cuentaActual1 = this.bancariaService.buscarPorNumero("001");
-		CuentaBancaria cuentaActual2= this.bancariaService.buscarPorNumero("002");
+		//Opcion2
+		Propietario propietario= new Propietario();
+		propietario.setApellido("Altamirano");
+		propietario.setCedula("1727501510");
+		propietario.setFechaDeNacimiento(LocalDateTime.of(1998, 7,7,12,35));
+		propietario.setNombre("Jhonatan");
 		
-		System.out.println("Saldo actual: "+cuentaActual1.getSaldo());
-		System.out.println("Saldo actual: "+cuentaActual2.getSaldo());
+		this.iPropietarioService.guardar(propietario);
 		
-		System.out.println("Reporte 1");
-		for(Transferencia t : this.iTransferenciaService.buscarReporte()) {
-			System.out.println(t);
-		}
-		this.iTransferenciaService.realizar("001","002",new BigDecimal(100));
-		System.out.println("Reporte 2");
-	//	System.out.println(this.iTransferenciaService.bus);
-		for(Transferencia t:this.iTransferenciaService.buscarReporte()) {
-			System.out.println(t);
-		}
-		System.out.println("Saldos nuevos");
-		CuentaBancaria cuentaConsultar1 = this.bancariaService.buscarPorNumero("001");
-		CuentaBancaria cuentaConsultar2 = this.bancariaService.buscarPorNumero("002");
-		
-		System.out.println("Nuevo saldo: "+cuentaConsultar1.getSaldo());
-		System.out.println("Nuevo saldo: "+cuentaConsultar2.getSaldo());
+		//Opcion3
+		this.iMatriculaService.matricular("1727501510", "PDGD5667");
 	}
 
 }
