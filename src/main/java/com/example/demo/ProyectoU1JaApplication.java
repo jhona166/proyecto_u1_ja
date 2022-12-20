@@ -4,12 +4,14 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.demo.ejercicio1.modelo.Propietario;
 import com.example.demo.ejercicio1.modelo.Vehiculo;
+import com.example.demo.ejercicio1.service.IMatriculaNuevaService;
 import com.example.demo.ejercicio1.service.IMatriculaRepository;
 import com.example.demo.ejercicio1.service.IMatriculaService;
 import com.example.demo.ejercicio1.service.IPropietarioService;
@@ -23,8 +25,14 @@ public class ProyectoU1JaApplication implements CommandLineRunner {
 	private IVehiculoService iVehiculoService;
 	@Autowired
 	private IPropietarioService iPropietarioService;
+	@Qualifier("pesado")
 	@Autowired
-	private IMatriculaService iMatriculaService;
+	private IMatriculaNuevaService iMatriculaServicePesado;
+	
+	@Qualifier("liviano")
+	@Autowired
+	private IMatriculaNuevaService iMatriculaServiceLiviano;
+	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU1JaApplication.class, args);
@@ -55,9 +63,10 @@ public class ProyectoU1JaApplication implements CommandLineRunner {
 		propietario.setNombre("Jhonatan");
 		
 		this.iPropietarioService.guardar(propietario);
+	
 		
 		//Opcion3
-		this.iMatriculaService.matricular("1727501510", "PDGD5667");
+		//this.iMatriculaService.matricula("1727501510", "PDGD5667");
 	}
 
 }
