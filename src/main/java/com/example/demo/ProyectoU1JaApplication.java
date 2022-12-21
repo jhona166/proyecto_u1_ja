@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.demo.ejercicio1.modelo.Propietario;
 import com.example.demo.ejercicio1.modelo.Vehiculo;
+import com.example.demo.ejercicio1.service.IGestorMatriculaService;
 import com.example.demo.ejercicio1.service.IMatriculaNuevaService;
 import com.example.demo.ejercicio1.service.IMatriculaRepository;
 import com.example.demo.ejercicio1.service.IMatriculaService;
@@ -20,7 +21,8 @@ import com.example.demo.ejercicio1.service.IVehiculoService;
 @SpringBootApplication
 public class ProyectoU1JaApplication implements CommandLineRunner {
 	
-	
+	@Autowired
+	private IGestorMatriculaService gestorMatriculaService;
 	@Autowired
 	private IVehiculoService iVehiculoService;
 	@Autowired
@@ -66,7 +68,7 @@ public class ProyectoU1JaApplication implements CommandLineRunner {
 	
 		
 		//Opcion3
-		//this.iMatriculaService.matricula("1727501510", "PDGD5667");
+		this.gestorMatriculaService.matricular("1727501510", "PDGD5667");
 	}
 
 }

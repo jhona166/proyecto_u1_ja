@@ -20,8 +20,9 @@ public class IMatriculaServiceImpl implements IMatriculaService{
 	private IPropietarioRepository iPropietarioRepository;
 	@Autowired
 	private IVehiculoRepository iVehiculoRepository;
+	
 	@Override
-	public void matricular(String cedula, String placa) {
+	public BigDecimal matricular(String cedula,String placa) {
 		// TODO Auto-generated method stub
 		Matricula matricula = new Matricula();
 		matricula.setFecha(LocalDateTime.now());
@@ -49,10 +50,12 @@ public class IMatriculaServiceImpl implements IMatriculaService{
 		if(valor.compareTo(new BigDecimal(2000))>1) {
 			BigDecimal descuento=valor.multiply(new BigDecimal(0.7));
 			valor = valor.subtract(descuento);
-			
 		}
 		matricula.setValor(valor);
 		this.iMatriculaRepository.insertar(matricula);
+	return valor;
 	}
+
+
 
 }

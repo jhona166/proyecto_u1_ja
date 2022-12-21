@@ -1,14 +1,18 @@
 package com.example.demo.ejercicio1.service;
 
+import java.math.BigDecimal;
+
 import org.springframework.stereotype.Service;
 
 @Service
 public class IMatriculaNuevaPesado implements IMatriculaNuevaService{
 
 	@Override
-	public void matricula(String cedula, String placa) {
+	public BigDecimal matricula(BigDecimal precio) {
 		// TODO Auto-generated method stub
-		System.out.println("Matriculado");
+		return null;
 	}
+
+	
 
 }
